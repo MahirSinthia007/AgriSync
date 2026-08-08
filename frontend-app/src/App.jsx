@@ -12,6 +12,9 @@ import EditProduct from "./pages/EditProduct";
 import ProductDetails from "./pages/ProductDetails";
 import BrowseProducts from "./pages/BrowseProducts";
 import Wishlist from "./pages/Wishlist";
+import Cart from "./pages/Cart";
+import MyOrders from "./pages/MyOrders";
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -86,6 +89,8 @@ function App() {
           path="/products/:id"
           element={<ProductDetails />}
         />
+        <Route path="/cart" element={role === "buyer" ? <Cart /> : <Navigate to="/" replace />} />
+        <Route path="/orders" element={<MyOrders />} />
 
         {/* Buyer Wishlist */}
         <Route

@@ -4,6 +4,9 @@
 import { useState, useEffect } from "react";
 import AuthForm from "./components/AuthForm";
 import ProfilePage from "./pages/ProfilePage";
+import Cart from "./pages/Cart";
+import MyOrders from "./pages/MyOrders";
+
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
