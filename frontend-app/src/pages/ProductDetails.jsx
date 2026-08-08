@@ -19,15 +19,22 @@ function ProductDetails() {
   }, []);
 
   const loadProduct = async () => {
-    const data = await getProduct(id);
-    setProduct(data);
-
     if (role === "buyer") {
-      const wishlist = await getWishlist().catch(() => []);
-      setIsWishlisted(wishlist.some((p) => p._id === id));
+      // Fire all three requests at once instead of waiting on each in turn —
+      // the product doesn't depend on wishlist/follow data, so there's no
+      // reason to block on them sequentially.
+      const [productData, wishlist, following] = await Promise.all([
+        getProduct(id),
+        getWishlist().catch(() => []),
+        getFollowedFarmers().catch(() => []),
+      ]);
 
-      const following = await getFollowedFarmers().catch(() => []);
-      setIsFollowing(following.some((f) => f._id === data.farmer?._id));
+      setProduct(productData);
+      setIsWishlisted(wishlist.some((p) => p._id === id));
+      setIsFollowing(following.some((f) => f._id === productData.farmer?._id));
+    } else {
+      const productData = await getProduct(id);
+      setProduct(productData);
     }
   };
 

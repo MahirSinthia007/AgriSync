@@ -22,6 +22,14 @@ function BrowseProducts() {
     try {
       const data = await getProducts(filters);
       setProducts(data);
+
+      // Build categories from this same response — no second request needed.
+      // Only merge in new categories, never drop ones already seen from a
+      // broader (unfiltered) load, so the dropdown doesn't shrink as you filter.
+      const cats = data
+        .map((p) => p.category || p.legacyCategory)
+        .filter((c) => c && c.trim() !== "");
+      setCategories((prev) => [...new Set([...prev, ...cats])]);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -31,18 +39,6 @@ function BrowseProducts() {
 
   useEffect(() => {
     fetchProducts({});
-
-    // Build the category dropdown from real product data,
-    // since category is a free-text field, not a fixed enum.
-    getProducts()
-      .then((all) => {
-        // Extract categories safely — handle both category and legacyCategory
-        const cats = all
-          .map((p) => p.category || p.legacyCategory)
-          .filter((c) => c && c.trim() !== '');  // Remove empty/null categories
-        setCategories([...new Set(cats)]);
-      })
-      .catch(() => {});
 
     if (role === "buyer") {
       getWishlist()
