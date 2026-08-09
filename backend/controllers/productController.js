@@ -271,6 +271,26 @@ const recordProductView = async (req, res) => {
   }
 };
 
+const getMyProducts = async (req, res) => {
+  try {
+    // req.user is set by your authMiddleware after verifying the JWT token
+    const products = await prisma.product.findMany({
+      where: { farmerId: req.user.id },
+      include: {
+        farmer: {
+          select: { id: true, name: true, email: true, phone: true, address: true }
+        }
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    res.json(products.map(shapeProduct));
+  } catch (error) {
+    console.error('Get my products error:', error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createProduct,
   getProducts,
@@ -278,6 +298,7 @@ module.exports = {
   updateProduct,
   deleteProduct,
   uploadProductImage,
+  getMyProducts,
   getRecommendations,
   recordProductView, 
 };

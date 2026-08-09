@@ -8,6 +8,7 @@ const {
   updateProduct,
   deleteProduct,
   uploadProductImage,
+  getMyProducts,
   getRecommendations,
   recordProductView,
 } = require("../controllers/productController");
@@ -20,6 +21,9 @@ router.post("/", protect, createProduct);
 
 // View all products
 router.get("/", getProducts);
+
+// Get MY products (Farmer only)
+router.get("/my", protect, getMyProducts);
 
 // GET Smart Recommendations
 router.get("/recommendations", protect, getRecommendations);

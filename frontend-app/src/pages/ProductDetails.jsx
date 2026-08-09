@@ -13,25 +13,38 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const [adding, setAdding] = useState(false);
   const [cartMsg, setCartMsg] = useState("");
+  const [loading, setLoading] = useState(true); // Added for smoother UX
   const { refreshCart } = useCart();
 
   const role = JSON.parse(localStorage.getItem("user") || "{}")?.role;
 
   useEffect(() => {
-    loadProduct();
-  }, []);
+    loadData();
+  }, [id]);
 
-  const loadProduct = async () => {
-    const data = await getProduct(id);
-    setProduct(data);
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const productData = await getProduct(id);
+      setProduct(productData);
 
-    if (role === "buyer") {
-      recordProductView(id);
-      const wishlist = await getWishlist().catch(() => []);
-      setIsWishlisted(wishlist.some((p) => p._id === id));
+      if (role === "buyer") {
+        // 1. Your Smart Recommendation tracker
+        recordProductView(id); 
 
-      const following = await getFollowedFarmers().catch(() => []);
-      setIsFollowing(following.some((f) => f._id === data.farmer?._id));
+        // 2. Groupmate's speed optimization (fetching both simultaneously)
+        const [wishlist, following] = await Promise.all([
+          getWishlist().catch(() => []),
+          getFollowedFarmers().catch(() => [])
+        ]);
+
+        setIsWishlisted(wishlist.some((p) => p._id === id));
+        setIsFollowing(following.some((f) => f._id === productData.farmer?._id));
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 

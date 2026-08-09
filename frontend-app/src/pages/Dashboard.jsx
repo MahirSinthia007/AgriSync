@@ -12,18 +12,24 @@ function Dashboard() {
   const [products, setProducts] = useState([])
   const [recommended, setRecommended] = useState([])
 
+const extractArray = (response) => {
+    if (Array.isArray(response)) return response;
+    if (response && Array.isArray(response.data)) return response.data;
+    return [];
+  };
+
   useEffect(() => {
     loadProducts()
   }, [])
 
-  const loadProducts = async () => {
+const loadProducts = async () => {
     try {
       if (role === "buyer") {
         const recData = await getRecommendations()
-        setRecommended(recData)
+        setRecommended(extractArray(recData).slice(0, 6))
       } else {
-      const data = await getProducts()
-      setProducts(data.slice(0, 6))
+        const data = await getProducts()
+        setProducts(extractArray(data).slice(0, 6))
       }
     } catch (err) {
       console.log(err)
@@ -60,7 +66,6 @@ function Dashboard() {
           <h2 className="text-2xl font-bold text-agri-800 mb-4">Featured Products</h2>
         )}
         
-        {/* Render Logic */}
         {(role === "buyer" ? recommended : products).length === 0 ? (
           <Card>
             <CardContent className="p-12 text-center text-stone-500">
