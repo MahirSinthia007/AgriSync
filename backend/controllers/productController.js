@@ -181,6 +181,96 @@ const uploadProductImage = async (req, res) => {
   }
 };
 
+const getRecommendations = async (req, res) => {
+  try {
+    let recommended = [];
+    const limit = 6; // Number of recommended products to return
+
+    if (req.user && req.user.role === 'buyer') {
+      // 1. Fetch buyer's past orders and viewed products
+      const orders = await prisma.order.findMany({
+        where: { buyerId: req.user.id },
+        include: { items: { include: { product: true } } }
+      });
+
+      const views = await prisma.productView.findMany({
+        where: { buyerId: req.user.id },
+        include: { product: true }
+      });
+
+      // 2. Determine preferred categories by weighing purchases and views
+      const categoryWeights = {};
+      
+      orders.forEach(order => {
+        order.items.forEach(item => {
+          const cat = item.product.legacyCategory;
+          if (cat) categoryWeights[cat] = (categoryWeights[cat] || 0) + 3; // Purchases have higher weight (3)
+        });
+      });
+
+      views.forEach(view => {
+        const cat = view.product.legacyCategory;
+        if (cat) categoryWeights[cat] = (categoryWeights[cat] || 0) + 1; // Views have lower weight (1)
+      });
+
+      // Sort categories by weight descending
+      const preferredCategories = Object.keys(categoryWeights)
+        .sort((a, b) => categoryWeights[b] - categoryWeights[a])
+        .slice(0, 3); // Take top 3 categories
+
+      // 3. Fetch highly rated products from preferred categories
+      if (preferredCategories.length > 0) {
+        recommended = await prisma.product.findMany({
+          where: {
+            legacyCategory: { in: preferredCategories },
+            isAvailable: true
+          },
+          orderBy: { averageRating: 'desc' },
+          take: limit,
+          include: { farmer: { select: { id: true, name: true, email: true, phone: true, address: true } } }
+        });
+      }
+    }
+
+    // 4. Fallback: If not enough recommended products, fill with overall highest-rated products
+    if (recommended.length < limit) {
+      const excludeIds = recommended.map(p => p.id);
+      const fallbackProducts = await prisma.product.findMany({
+        where: {
+          isAvailable: true,
+          id: { notIn: excludeIds.length ? excludeIds : undefined }
+        },
+        orderBy: { averageRating: 'desc' },
+        take: limit - recommended.length,
+        include: { farmer: { select: { id: true, name: true, email: true, phone: true, address: true } } }
+      });
+      recommended = [...recommended, ...fallbackProducts];
+    }
+
+    res.json(recommended.map(shapeProduct));
+  } catch (error) {
+    console.error('Get recommendations error:', error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const recordProductView = async (req, res) => {
+  try {
+    if (req.user && req.user.role === 'buyer') {
+      await prisma.productView.create({
+        data: {
+          buyerId: req.user.id,
+          productId: req.params.id
+        }
+      });
+    }
+    res.status(200).json({ success: true });
+  } catch (error) {
+    // Fail silently so it doesn't disrupt the user experience if a duplicate view triggers an error
+    res.status(200).json({ success: false });
+  }
+};
+
 module.exports = {
   createProduct,
   getProducts,
@@ -188,4 +278,6 @@ module.exports = {
   updateProduct,
   deleteProduct,
   uploadProductImage,
+  getRecommendations,
+  recordProductView, 
 };

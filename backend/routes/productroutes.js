@@ -8,6 +8,8 @@ const {
   updateProduct,
   deleteProduct,
   uploadProductImage,
+  getRecommendations,
+  recordProductView,
 } = require("../controllers/productController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -19,8 +21,14 @@ router.post("/", protect, createProduct);
 // View all products
 router.get("/", getProducts);
 
+// GET Smart Recommendations
+router.get("/recommendations", protect, getRecommendations);
+
 // View one product
 router.get("/:id", getProductById);
+
+// Record a product view for the recommendation engine
+router.post("/:id/view", protect, recordProductView);
 
 // Update product
 router.put("/:id", protect, updateProduct);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProduct } from "../api/productApi";
+import { getProduct, recordProductView } from "../api/productApi";
 import { getWishlist, toggleWishlist, getFollowedFarmers, toggleFollowFarmer } from "../api/userApi";
 import { addToCart } from "../api/cartApi";
 import { useCart } from "../context/CartContext";
@@ -26,6 +26,7 @@ function ProductDetails() {
     setProduct(data);
 
     if (role === "buyer") {
+      recordProductView(id);
       const wishlist = await getWishlist().catch(() => []);
       setIsWishlisted(wishlist.some((p) => p._id === id));
 

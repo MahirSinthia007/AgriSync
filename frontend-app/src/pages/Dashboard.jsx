@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { getProducts } from "../api/productApi"
+import { getProducts, getRecommendations } from "../api/productApi"
 import ProductCard from "../components/product/ProductCard"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, MessageCircle, User, Search, PlusCircle, PackageOpen, Heart } from "lucide-react"
+import { MapPin, MessageCircle, User, Search, PlusCircle, PackageOpen, Heart, Sparkles } from "lucide-react"
 
 function Dashboard() {
   const user = JSON.parse(localStorage.getItem("user"))
   const role = user?.role
   const [products, setProducts] = useState([])
+  const [recommended, setRecommended] = useState([])
 
   useEffect(() => {
     loadProducts()
@@ -17,8 +18,13 @@ function Dashboard() {
 
   const loadProducts = async () => {
     try {
+      if (role === "buyer") {
+        const recData = await getRecommendations()
+        setRecommended(recData)
+      } else {
       const data = await getProducts()
       setProducts(data.slice(0, 6))
+      }
     } catch (err) {
       console.log(err)
     }
@@ -44,10 +50,18 @@ function Dashboard() {
         )}
       </div>
 
-      {/* Featured Products */}
+      {/* Featured / Recommended Products Section */}
       <section>
-        <h2 className="text-2xl font-bold text-agri-800 mb-4">Featured Products</h2>
-        {products.length === 0 ? (
+        {role === "buyer" ? (
+          <h2 className="text-2xl font-bold text-agri-800 mb-4 flex items-center gap-2">
+            <Sparkles className="w-6 h-6 text-yellow-500" /> Recommended for You
+          </h2>
+        ) : (
+          <h2 className="text-2xl font-bold text-agri-800 mb-4">Featured Products</h2>
+        )}
+        
+        {/* Render Logic */}
+        {(role === "buyer" ? recommended : products).length === 0 ? (
           <Card>
             <CardContent className="p-12 text-center text-stone-500">
               No products available yet.
@@ -55,7 +69,7 @@ function Dashboard() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
+            {(role === "buyer" ? recommended : products).map((product) => (
               <ProductCard key={product._id} product={product} showActions={false} />
             ))}
           </div>

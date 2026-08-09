@@ -118,3 +118,32 @@ export const uploadProductImage = async (id, imageFile) => {
 
   return data;
 };
+
+// Get Smart Recommendations
+export const getRecommendations = async () => {
+  const response = await fetch(`${API_URL}/recommendations`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to load recommendations");
+  }
+  return data;
+};
+
+// Record Product View
+export const recordProductView = async (id) => {
+  try {
+    await fetch(`${API_URL}/${id}/view`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+  } catch (error) {
+    console.error("Failed to record view");
+  }
+};
