@@ -81,7 +81,7 @@ const getActiveOffers = async (req, res) => {
     const now = new Date();
     const offers = await prisma.promotion.findMany({
       where: {
-        status: 'APPROVED',
+        // status: 'APPROVED',
         isActive: true,
         startDate: { lte: now },
         endDate: { gte: now },
