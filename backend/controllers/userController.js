@@ -197,7 +197,7 @@ const uploadProfileImage = async (req, res) => {
 
     const updatedUser = await prisma.user.update({
       where: { id: req.user.id },
-      data: { profileImage: `/uploads/${req.file.filename}` },
+      data: { profileImage: req.processedFile.url },
       select: { profileImage: true },
     });
 
