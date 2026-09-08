@@ -316,7 +316,7 @@ const uploadProductImage = async (req, res) => {
     if (!product) return res.status(404).json({ message: 'Product not found' });
     if (product.farmerId !== req.user.id) return res.status(403).json({ message: 'Not authorized' });
 
-    const updatedImages = [...product.images, `/uploads/${req.processedFile.filename}`];
+    const updatedImages = [...product.images, req.processedFile.url];
 
     const updated = await prisma.product.update({
       where: { id: req.params.id },

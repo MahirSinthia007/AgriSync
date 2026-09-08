@@ -52,6 +52,18 @@ const DISTRICTS = {
 const CITIES_FOR_DELIVERY = ["Dhaka", "Gazipur", "Narayanganj", "Rajshahi", "Khulna", "Chittagong", "Sylhet", "Barisal", "Rangpur", "Mymensingh"];
 const AREAS_FOR_DELIVERY = ["Dhanmondi", "Mirpur", "Uttara", "Gulshan", "Banani", "Mohammadpur", "Sadar", "Town", "City Center", "Old Town", "Kalabagan", "Shyamoli", "Farmgate", "Badda", "Rampura"];
 
+// Verified profile photos (Unsplash)
+const PROFILE_IMAGES = [
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80",
+  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
+  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+];
+
 const FARMER_NAMES = [
   "Abdul Karim", "Hasina Begum", "Mohammad Ali", "Rina Akter", "Shafiqul Islam",
   "Nazma Khatun", "Anwar Hossain", "Parveen Sultana", "Kamal Uddin", "Sultana Razia",
@@ -82,72 +94,74 @@ const DELIVERY_MEN_DATA = [
   { name: "Jahangir Alam", division: "Mymensingh", district: "Mymensingh", vehicle: "Motorcycle", areas: ["Mymensingh", "Jamalpur", "Netrokona"] },
 ];
 
+
+
 const VEGETABLES = [
-  { name: "Organic Tomatoes", price: 80, unit: "kg", origin: "Gazipur, Dhaka", originDetails: "Grown in greenhouse using organic compost. No chemical pesticides." },
-  { name: "Green Spinach", price: 40, unit: "bunch", origin: "Gazipur, Dhaka", originDetails: "Hand-picked daily at 5:00 AM. Irrigated with natural pond water." },
-  { name: "Red Potatoes", price: 45, unit: "kg", origin: "Munshiganj, Dhaka", originDetails: "Traditional cultivation in alluvial soil. Harvested after 90 days." },
-  { name: "Sweet Pumpkins", price: 60, unit: "kg", origin: "Rajshahi", originDetails: "Rain-fed farming. Naturally sweet due to high sunlight exposure." },
-  { name: "Fresh Cucumbers", price: 55, unit: "kg", origin: "Chandpur, Chittagong", originDetails: "Vertical trellis farming. Picked daily for maximum freshness." },
-  { name: "Green Beans", price: 90, unit: "kg", origin: "Khulna", originDetails: "Grown in sandy loam soil. Harvested by hand to prevent bruising." },
-  { name: "Bitter Gourd (Korola)", price: 70, unit: "kg", origin: "Barisal", originDetails: "Climbing vine cultivation. Harvested young for tenderness." },
-  { name: "Bottle Gourd (Lau)", price: 50, unit: "kg", origin: "Rajshahi", originDetails: "Summer crop. Each gourd 1.5-2.5 kg." },
-  { name: "Okra (Dherosh)", price: 85, unit: "kg", origin: "Sylhet", originDetails: "Picked every morning to preserve crispness. Grown in hilly terraced fields." },
-  { name: "Eggplant (Begun)", price: 65, unit: "kg", origin: "Dhaka", originDetails: "Open field cultivation. Farm-to-table within 24 hours." },
-  { name: "Cauliflower", price: 40, unit: "piece", origin: "Gazipur, Dhaka", originDetails: "Winter variety grown in highland. Compact white curd." },
-  { name: "Cabbage", price: 35, unit: "piece", origin: "Rajshahi", originDetails: "Layer-by-layer quality check. Grown with cow manure compost." },
-  { name: "Carrots", price: 75, unit: "kg", origin: "Khulna", originDetails: "Sandy soil produces straight, sweet roots. No bleaching." },
-  { name: "Green Chilies", price: 120, unit: "kg", origin: "Chittagong", originDetails: "High-heat variety from Hill Tracts. Picked at peak ripeness." },
-  { name: "Onions (Local)", price: 55, unit: "kg", origin: "Faridpur, Dhaka", originDetails: "Stored in ventilated barn for 2 weeks before sale." },
-  { name: "Garlic (Local)", price: 180, unit: "kg", origin: "Rajshahi", originDetails: "Small-clove aromatic variety. Dried under shade for 3 weeks." },
-  { name: "Ginger (Fresh)", price: 150, unit: "kg", origin: "Sylhet", originDetails: "High-altitude ginger with strong aroma. Harvested after 8 months." },
-  { name: "Radish (Mula)", price: 30, unit: "kg", origin: "Dhaka", originDetails: "30-day quick crop. Crisp and juicy. Harvested before sunrise." },
+  { name: "Organic Tomatoes", price: 80, unit: "kg", origin: "Gazipur, Dhaka", originDetails: "Grown in greenhouse using organic compost. No chemical pesticides.", imageUrl: "https://plus.unsplash.com/premium_photo-1661811820259-2575b82101bf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8T3JnYW5pYyUyMFRvbWF0b2VzfGVufDB8fDB8fHww" },
+  { name: "Green Spinach", price: 40, unit: "bunch", origin: "Gazipur, Dhaka", originDetails: "Hand-picked daily at 5:00 AM. Irrigated with natural pond water.", imageUrl: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { name: "Red Potatoes", price: 45, unit: "kg", origin: "Munshiganj, Dhaka", originDetails: "Traditional cultivation in alluvial soil. Harvested after 90 days.", imageUrl: "https://images.unsplash.com/photo-1741517628573-622881235f18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8UmVkJTIwUG90YXRvZXN8ZW58MHx8MHx8fDA%3D" },
+  { name: "Sweet Pumpkins", price: 60, unit: "kg", origin: "Rajshahi", originDetails: "Rain-fed farming. Naturally sweet due to high sunlight exposure.", imageUrl: "https://images.unsplash.com/photo-1692680919402-95fc56f99225?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3dlZXQlMjBwdW1wa2lufGVufDB8fDB8fHww" },
+  { name: "Fresh Cucumbers", price: 55, unit: "kg", origin: "Chandpur, Chittagong", originDetails: "Vertical trellis farming. Picked daily for maximum freshness.", imageUrl: "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RnJlc2glMjBDdWN1bWJlcnN8ZW58MHx8MHx8fDA%3D" },
+  { name: "Green Beans", price: 90, unit: "kg", origin: "Khulna", originDetails: "Grown in sandy loam soil. Harvested by hand to prevent bruising.", imageUrl: "https://plus.unsplash.com/premium_photo-1725384940646-ef6aa8c2a091?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB８MHxzZWFyY2h８MXx8R3JlZW4lMjBCZWFucyUyMnxlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Bitter Gourd (Korola)", price: 70, unit: "kg", origin: "Barisal", originDetails: "Climbing vine cultivation. Harvested young for tenderness.", imageUrl:"https://images.unsplash.com/photo-1676994174279-102e0abff98f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Qml0dGVyJTIwR291cmR8ZW58MHx8MHx8fDA%3D" },
+  { name: "Bottle Gourd (Lau)", price: 50, unit: "kg", origin: "Rajshahi", originDetails: "Summer crop. Each gourd 1.5-2.5 kg.", imageUrl: "http://images.unsplash.com/photo-1730127487636-b7fe550af030?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+  { name: "Okra (Dherosh)", price: 85, unit: "kg", origin: "Sylhet", originDetails: "Picked every morning to preserve crispness. Grown in hilly terraced fields.", imageUrl: "https://images.unsplash.com/photo-1558408525-1092038389ae?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"},
+  { name: "Eggplant (Begun)", price: 65, unit: "kg", origin: "Dhaka", originDetails: "Open field cultivation. Farm-to-table within 24 hours.", imageUrl: "https://images.unsplash.com/photo-1613881553903-4543f5f2cac9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZWdncGxhbnR8ZW58MHx8MHx8fDA%3D"},
+  { name: "Cauliflower", price: 40, unit: "piece", origin: "Gazipur, Dhaka", originDetails: "Winter variety grown in highland. Compact white curd.", imageUrl: "https://images.unsplash.com/photo-1566842600175-97dca489844f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q2F1bGlmbG93ZXJ8ZW58MHx8MHx8fDA%3D"},
+  { name: "Cabbage", price: 35, unit: "piece", origin: "Rajshahi", originDetails: "Layer-by-layer quality check. Grown with cow manure compost.", imageUrl: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q2FiYmFnZXxlbnwwfHwwfHx8MA%3D%3D"},
+  { name: "Carrots", price: 75, unit: "kg", origin: "Khulna", originDetails: "Sandy soil produces straight, sweet roots. No bleaching.", imageUrl: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q2Fycm90c3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Green Chilies", price: 120, unit: "kg", origin: "Chittagong", originDetails: "High-heat variety from Hill Tracts. Picked at peak ripeness.", imageUrl: "https://images.unsplash.com/photo-1693664132235-1b7050b45da5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8R3JlZW4lMjBDaGlsbGllc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Onions (Local)", price: 55, unit: "kg", origin: "Faridpur, Dhaka", originDetails: "Stored in ventilated barn for 2 weeks before sale.", imageUrl: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8b25pb25zfGVufDB8fDB8fHww" },
+  { name: "Garlic (Local)", price: 180, unit: "kg", origin: "Rajshahi", originDetails: "Small-clove aromatic variety. Dried under shade for 3 weeks.", imageUrl: "https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8R2FybGljfGVufDB8fDB8fHww" },
+  { name: "Ginger (Fresh)", price: 150, unit: "kg", origin: "Sylhet", originDetails: "High-altitude ginger with strong aroma. Harvested after 8 months.", imageUrl: "https://plus.unsplash.com/premium_photo-1675364893053-180a3c6e0119?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8R2luZ2VyJTIwKEZyZXNoKXxlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Radish (Mula)", price: 30, unit: "kg", origin: "Dhaka", originDetails: "30-day quick crop. Crisp and juicy. Harvested before sunrise.", imageUrl: "https://images.unsplash.com/photo-1585369496178-144fd937f249?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UmFkaXNofGVufDB8fDB8fHww" },
 ];
 
 const FRUITS = [
-  { name: "Rajshahi Mangoes (Langra)", price: 250, unit: "kg", origin: "Rajshahi", originDetails: "GI Tagged Rajshahi Langra. Tree-ripened." },
-  { name: "Chapainawabganj Mangoes (Fazli)", price: 200, unit: "kg", origin: "Chapainawabganj", originDetails: "Large pulpy Fazli variety. Single-origin orchard." },
-  { name: "Sweet Bananas (Sagor)", price: 60, unit: "dozen", origin: "Chittagong", originDetails: "Hill banana variety. No carbide treatment." },
-  { name: "Pineapples (Kew)", price: 90, unit: "piece", origin: "Mymensingh", originDetails: "Kew variety from Madhupur tract. High sugar content." },
-  { name: "Guavas", price: 70, unit: "kg", origin: "Barisal", originDetails: "White-fleshed Thai variety grafted on local rootstock." },
-  { name: "Papayas", price: 50, unit: "kg", origin: "Khulna", originDetails: "Red Lady variety. Tree-ripened for 3 days before packing." },
-  { name: "Watermelons", price: 35, unit: "kg", origin: "Dinajpur", originDetails: "Black Diamond variety from northern char lands." },
-  { name: "Jackfruit (Kanthal)", price: 120, unit: "kg", origin: "Sylhet", originDetails: "Seasonal harvest June-August. Cut and packed within 2 hours." },
-  { name: "Lychees", price: 300, unit: "kg", origin: "Dinajpur", originDetails: "Bedana variety from Thakurgaon. Air-cooled after harvest." },
-  { name: "Oranges", price: 180, unit: "kg", origin: "Rangpur", originDetails: "Local Malta variety. Cold-stored from December-January harvest." },
-  { name: "Lemons", price: 100, unit: "kg", origin: "Chittagong", originDetails: "Seedless Kagzi lemon. High juice yield." },
-  { name: "Coconuts", price: 55, unit: "piece", origin: "Barisal", originDetails: "Young green coconuts from coastal groves." },
+  { name: "Rajshahi Mangoes (Langra)", price: 250, unit: "kg", origin: "Rajshahi", originDetails: "GI Tagged Rajshahi Langra. Tree-ripened.", imageUrl:"https://images.unsplash.com/photo-1553279768-865429fa0078?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8TWFuZ29lc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Chapainawabganj Mangoes (Fazli)", price: 200, unit: "kg", origin: "Chapainawabganj", originDetails: "Large pulpy Fazli variety. Single-origin orchard.", imageUrl:"https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TWFuZ29lc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Sweet Bananas (Sagor)", price: 60, unit: "dozen", origin: "Chittagong", originDetails: "Hill banana variety. No carbide treatment.", imageUrl: "https://images.unsplash.com/photo-1668968554885-c08ad72c2133?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fEJhbmFuYXN8ZW58MHx8MHx8fDA%3D" },
+  { name: "Pineapples (Kew)", price: 90, unit: "piece", origin: "Mymensingh", originDetails: "Kew variety from Madhupur tract. High sugar content.", imageUrl:"https://images.unsplash.com/photo-1587883012610-e3df17d41270?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UGluZWFwcGxlc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Guavas", price: 70, unit: "kg", origin: "Barisal", originDetails: "White-fleshed Thai variety grafted on local rootstock.", imageUrl:"https://images.unsplash.com/photo-1693399991519-bef70bed19a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8R3VhdmFzfGVufDB8fDB8fHww" },
+  { name: "Papayas", price: 50, unit: "kg", origin: "Khulna", originDetails: "Red Lady variety. Tree-ripened for 3 days before packing.", imageUrl: "https://plus.unsplash.com/premium_photo-1722938907181-08d806f7b9a6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8UGFwYXlhc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Watermelons", price: 35, unit: "kg", origin: "Dinajpur", originDetails: "Black Diamond variety from northern char lands.", imageUrl: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8V2F0ZXJtZWxvbnN8ZW58MHx8MHx8fDA%3D" },
+  { name: "Jackfruit (Kanthal)", price: 120, unit: "kg", origin: "Sylhet", originDetails: "Seasonal harvest June-August. Cut and packed within 2 hours.", imageUrl: "https://images.unsplash.com/photo-1718181919605-6a2a07934d33?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8SmFja2ZydWl0fGVufDB8fDB8fHww" },
+  { name: "Lychees", price: 300, unit: "kg", origin: "Dinajpur", originDetails: "Bedana variety from Thakurgaon. Air-cooled after harvest.", imageUrl: "https://images.unsplash.com/photo-1705335834319-92a152363ea1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8THljaGVlc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Oranges", price: 180, unit: "kg", origin: "Rangpur", originDetails: "Local Malta variety. Cold-stored from December-January harvest.", imageUrl: "https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8T3Jhbmdlc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Lemons", price: 100, unit: "kg", origin: "Chittagong", originDetails: "Seedless Kagzi lemon. High juice yield.", imageUrl:"https://images.unsplash.com/photo-1590502593747-42a996133562?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TGVtb25zfGVufDB8fDB8fHww " },
+  { name: "Coconuts", price: 55, unit: "piece", origin: "Barisal", originDetails: "Young green coconuts from coastal groves.", imageUrl: "https://images.unsplash.com/photo-1560769680-ba2f3767c785?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Q29jb251dHN8ZW58MHx8MHx8fDA%3D" },
 ];
 
 const RICE_GRAINS = [
-  { name: "Miniket Rice", price: 65, unit: "kg", origin: "Rajshahi", originDetails: "Aman season harvest, November 2025. Aged 9 months." },
-  { name: "Nazirshail Rice", price: 72, unit: "kg", origin: "Mymensingh", originDetails: "Fine-grain premium rice. Double-parboiled." },
-  { name: "Chinigura Rice", price: 120, unit: "kg", origin: "Sylhet", originDetails: "Aromatic short-grain for pulao. Aged 6 months." },
-  { name: "Kalijira Rice", price: 150, unit: "kg", origin: "Barisal", originDetails: "Baby basmati of Bangladesh. Stone-milled." },
-  { name: "Brown Rice (Organic)", price: 95, unit: "kg", origin: "Khulna", originDetails: "Whole grain with bran intact. Organic certified." },
-  { name: "Red Lentils (Masoor Dal)", price: 140, unit: "kg", origin: "Rajshahi", originDetails: "Local masoor variety. Sun-dried and dehusked." },
-  { name: "Mung Beans", price: 160, unit: "kg", origin: "Chittagong", originDetails: "Hill tract mung. Uniform size, quick cooking." },
-  { name: "Chickpeas (Chola)", price: 110, unit: "kg", origin: "Dhaka", originDetails: "Desi chickpea variety. Higher fiber than Kabuli type." },
+  { name: "Miniket Rice", price: 65, unit: "kg", origin: "Rajshahi", originDetails: "Aman season harvest, November 2025. Aged 9 months.", imageUrl:"https://images.unsplash.com/photo-1613758235256-43a7bdc21d82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFJpY2V8ZW58MHx8MHx8fDA%3D" },
+  { name: "Nazirshail Rice", price: 72, unit: "kg", origin: "Mymensingh", originDetails: "Fine-grain premium rice. Double-parboiled.", imageUrl: "https://images.unsplash.com/photo-1686820740687-426a7b9b2043?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8UmljZXxlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Chinigura Rice", price: 120, unit: "kg", origin: "Sylhet", originDetails: "Aromatic short-grain for pulao. Aged 6 months.", imageUrl:"https://images.unsplash.com/photo-1705147289789-6df2593f1b1e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFzbWF0aXxlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Kalijira Rice", price: 150, unit: "kg", origin: "Barisal", originDetails: "Baby basmati of Bangladesh. Stone-milled.", imageUrl: "https://images.unsplash.com/photo-1723475158232-819e29803f4d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmFzbWF0aSUyMFJpY2V8ZW58MHx8MHx8fDA%3D" },
+  { name: "Brown Rice (Organic)", price: 95, unit: "kg", origin: "Khulna", originDetails: "Whole grain with bran intact. Organic certified.", imageUrl:"https://plus.unsplash.com/premium_photo-1705338026411-00639520a438?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8UmljZXxlbnwwfHwwfHx8MA%3D%3D " },
+  { name: "Red Lentils (Masoor Dal)", price: 140, unit: "kg", origin: "Rajshahi", originDetails: "Local masoor variety. Sun-dried and dehusked.", imageUrl: "https://plus.unsplash.com/premium_photo-1700842186907-1978ef106f21?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8UmVkJTIwTGVudGlsc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Mung Beans", price: 160, unit: "kg", origin: "Chittagong", originDetails: "Hill tract mung. Uniform size, quick cooking.", imageUrl: "https://images.unsplash.com/photo-1594900799266-0e56587ba586?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8TXVuZyUyMEJlYW5zfGVufDB8fDB8fHww" },
+  { name: "Chickpeas (Chola)", price: 110, unit: "kg", origin: "Dhaka", originDetails: "Desi chickpea variety. Higher fiber than Kabuli type.", imageUrl: "https://images.unsplash.com/photo-1644432757699-bb5a01e8fb0e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8JTIyQ2hpY2twZWFzfGVufDB8fDB8fHww" },
 ];
 
 const DAIRY_POULTRY = [
-  { name: "Fresh Cow Milk", price: 85, unit: "liter", origin: "Gazipur, Dhaka", originDetails: "Raw milk from crossbred cows. Cooled to 4C within 30 minutes." },
-  { name: "Farm Fresh Eggs", price: 140, unit: "dozen", origin: "Gazipur, Dhaka", originDetails: "Layer hen eggs collected daily. Best before 21 days." },
-  { name: "Desi Chicken Eggs", price: 180, unit: "dozen", origin: "Rajshahi", originDetails: "Free-range desi hen eggs. Rich orange yolk." },
-  { name: "Homemade Ghee", price: 850, unit: "kg", origin: "Khulna", originDetails: "Traditional bilona method. Made from curd. Aged 15 days." },
-  { name: "Fresh Paneer", price: 450, unit: "kg", origin: "Dhaka", originDetails: "Made from full-fat milk daily. No starch or fillers." },
-  { name: "Broiler Chicken", price: 180, unit: "kg", origin: "Chittagong", originDetails: "Farm-raised 35-day broiler. Halal cut." },
-  { name: "Desi Chicken (Whole)", price: 350, unit: "kg", origin: "Sylhet", originDetails: "Free-range 6-month desi chicken. Halal cut on order." },
+  { name: "Fresh Cow Milk", price: 85, unit: "liter", origin: "Gazipur, Dhaka", originDetails: "Raw milk from crossbred cows. Cooled to 4C within 30 minutes.", imageUrl: "https://plus.unsplash.com/premium_photo-1694481100261-ab16523c4093?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8RnJlc2glMjBDb3clMjBNaWxrfGVufDB8fDB8fHww" },
+  { name: "Farm Fresh Eggs", price: 140, unit: "dozen", origin: "Gazipur, Dhaka", originDetails: "Layer hen eggs collected daily. Best before 21 days.", imageUrl: "https://images.unsplash.com/photo-1639194335563-d56b83f0060c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RmFybSUyMEZyZXNoJTIwRWdnc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Desi Chicken Eggs", price: 180, unit: "dozen", origin: "Rajshahi", originDetails: "Free-range desi hen eggs. Rich orange yolk.", imageUrl:"https://images.unsplash.com/photo-1598965675045-45c5e72c7d05?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fENoaWNrZW4lMjBFZ2dzJTIyfGVufDB8fDB8fHww " },
+  { name: "Homemade Ghee", price: 850, unit: "kg", origin: "Khulna", originDetails: "Traditional bilona method. Made from curd. Aged 15 days.", imageUrl: "https://images.unsplash.com/photo-1573812461383-e5f8b759d12e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8SG9tZW1hZGUlMjBHaGVlfGVufDB8fDB8fHww" },
+  { name: "Fresh Paneer", price: 450, unit: "kg", origin: "Dhaka", originDetails: "Made from full-fat milk daily. No starch or fillers.", imageUrl:"https://plus.unsplash.com/premium_photo-1695044277238-6eac8969fb77?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8RnJlc2glMjBQYW5lZXJ8ZW58MHx8MHx8fDA%3D" },
+  { name: "Broiler Chicken", price: 180, unit: "kg", origin: "Chittagong", originDetails: "Farm-raised 35-day broiler. Halal cut.", imageUrl: "https://images.unsplash.com/photo-1589922583749-6b8473a85048?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8QnJvaWxlciUyMENoaWNrZW58ZW58MHx8MHx8fDA%3D" },
+  { name: "Desi Chicken (Whole)", price: 350, unit: "kg", origin: "Sylhet", originDetails: "Free-range 6-month desi chicken. Halal cut on order.", imageUrl:"https://images.unsplash.com/photo-1731328966800-b677e4fcda8d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fEJyb2lsZXIlMjBDaGlja2VufGVufDB8fDB8fHww" },
 ];
 
 const SPICES_HERBS = [
-  { name: "Turmeric Powder (Organic)", price: 380, unit: "kg", origin: "Khulna", originDetails: "Sundarbans region turmeric. Stone-ground. Curcumin: 4-5%." },
-  { name: "Cumin Seeds", price: 520, unit: "kg", origin: "Rajshahi", originDetails: "Local black cumin (shahi jeera). Harvested March-April." },
-  { name: "Coriander Seeds", price: 280, unit: "kg", origin: "Dhaka", originDetails: "Round-seed variety for curry bases. No fumigation." },
-  { name: "Black Pepper (Whole)", price: 750, unit: "kg", origin: "Chittagong", originDetails: "Hill Tracts black pepper. Sun-dried 5 days." },
-  { name: "Cinnamon Sticks", price: 600, unit: "kg", origin: "Sylhet", originDetails: "Sylhet cinnamon. Hand-rolled quills. Dried in bamboo sheds." },
-  { name: "Cardamom (Whole)", price: 2200, unit: "kg", origin: "Rangpur", originDetails: "Large green cardamom pods. Harvested just before splitting." },
-  { name: "Bay Leaves", price: 180, unit: "kg", origin: "Barisal", originDetails: "Mature leaves from 10-year-old trees. Air-dried in shade." },
-  { name: "Dried Red Chilies", price: 350, unit: "kg", origin: "Chittagong", originDetails: "Kashmiri-type long chilies. Sun-dried 7 days." },
+  { name: "Turmeric Powder (Organic)", price: 380, unit: "kg", origin: "Khulna", originDetails: "Sundarbans region turmeric. Stone-ground. Curcumin: 4-5%.", imageUrl: "https://images.unsplash.com/photo-1583949885751-23b7d1909378?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8VHVybWVyaWMlMjBQb3dkZXJ8ZW58MHx8MHx8fDA%3D" },
+  { name: "Cumin Seeds", price: 520, unit: "kg", origin: "Rajshahi", originDetails: "Local black cumin (shahi jeera). Harvested March-April.", imageUrl:"https://images.unsplash.com/photo-1587493053604-f943541023aa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Q3VtaW4lMjBTZWVkc3xlbnwwfHwwfHx8MA%3D%3D" },
+  { name: "Coriander Seeds", price: 280, unit: "kg", origin: "Dhaka", originDetails: "Round-seed variety for curry bases. No fumigation.", imageUrl:"https://images.unsplash.com/photo-1652209741060-041f95ad2abf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Q29yaWFuZGVyJTIwU2VlZHN8ZW58MHx8MHx8fDA%3D" },
+  { name: "Black Pepper (Whole)", price: 750, unit: "kg", origin: "Chittagong", originDetails: "Hill Tracts black pepper. Sun-dried 5 days.", imageUrl: "https://images.unsplash.com/photo-1591801058986-9e28e68670f7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QmxhY2slMjBQZXBwZXJ8ZW58MHx8MHx8fDA%3D" },
+  { name: "Cinnamon Sticks", price: 600, unit: "kg", origin: "Sylhet", originDetails: "Sylhet cinnamon. Hand-rolled quills. Dried in bamboo sheds.", imageUrl:"https://images.unsplash.com/photo-1553499944-e4297a0af1bd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q2lubmFtb24lMjBTdGlja3N8ZW58MHx8MHx8fDA%3D" },
+  { name: "Cardamom (Whole)", price: 2200, unit: "kg", origin: "Rangpur", originDetails: "Large green cardamom pods. Harvested just before splitting.", imageUrl:"https://images.unsplash.com/photo-1622824497447-b284a5493027?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Q2FyZGFtb218ZW58MHx8MHx8fDA%3D" },
+  { name: "Bay Leaves", price: 180, unit: "kg", origin: "Barisal", originDetails: "Mature leaves from 10-year-old trees. Air-dried in shade.", imageUrl: "https://images.unsplash.com/photo-1612549224874-24dec5ba09f4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8QmF5JTIwTGVhdmVzfGVufDB8fDB8fHww" },
+  { name: "Dried Red Chilies", price: 350, unit: "kg", origin: "Chittagong", originDetails: "Kashmiri-type long chilies. Sun-dried 7 days.", imageUrl: "https://plus.unsplash.com/premium_photo-1726862874540-531140b04f62?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8RHJpZWQlMjBSZWQlMjBDaGlsaWVzfGVufDB8fDB8fHww" },
 ];
 
 const REVIEW_COMMENTS = [
@@ -239,6 +253,7 @@ async function main() {
         latitude: 21.0 + Math.random() * 4,
         longitude: 88.0 + Math.random() * 4,
         bio: `Experienced farmer from ${dist} specializing in organic produce.`,
+        profileImage: pick(PROFILE_IMAGES), 
         farmerProfile: {
           create: {
             farmName: `${FARMER_NAMES[i].split(" ")[0]}'s Farm`,
@@ -278,6 +293,7 @@ async function main() {
         district: dist,
         latitude: 21.0 + Math.random() * 4,
         longitude: 88.0 + Math.random() * 4,
+        profileImage: pick(PROFILE_IMAGES),
         buyerProfile: {
           create: {
             rewardPoints: randInt(0, 500),
@@ -310,6 +326,7 @@ async function main() {
         district: dmData.district,
         latitude: 21.0 + Math.random() * 4,
         longitude: 88.0 + Math.random() * 4,
+        profileImage: pick(PROFILE_IMAGES),
         deliveryManProfile: {
           create: {
             vehicleType: dmData.vehicle,
@@ -331,28 +348,28 @@ async function main() {
   // 5. CATEGORIES (8 main + 4 sub)
   // ========================================================================
   const catVeg = await prisma.category.create({
-    data: { name: "Fresh Vegetables", slug: "fresh-vegetables", description: "Locally grown fresh vegetables" },
+    data: { name: "Fresh Vegetables", slug: "fresh-vegetables", description: "Locally grown fresh vegetables", imageUrl: "" },
   });
   const catFruit = await prisma.category.create({
-    data: { name: "Fruits", slug: "fruits", description: "Seasonal and fresh fruits" },
+    data: { name: "Fruits", slug: "fruits", description: "Seasonal and fresh fruits", imageUrl: "" },
   });
   const catRice = await prisma.category.create({
-    data: { name: "Rice & Grains", slug: "rice-grains", description: "Premium quality rice and grains" },
+    data: { name: "Rice & Grains", slug: "rice-grains", description: "Premium quality rice and grains", imageUrl: "" },
   });
   const catDairy = await prisma.category.create({
-    data: { name: "Dairy & Poultry", slug: "dairy-poultry", description: "Fresh milk, eggs, and meat" },
+    data: { name: "Dairy & Poultry", slug: "dairy-poultry", description: "Fresh milk, eggs, and meat", imageUrl: "" },
   });
   const catSpice = await prisma.category.create({
-    data: { name: "Spices & Herbs", slug: "spices-herbs", description: "Organic spices and dried herbs" },
+    data: { name: "Spices & Herbs", slug: "spices-herbs", description: "Organic spices and dried herbs", imageUrl: "" },
   });
   const catOrganic = await prisma.category.create({
-    data: { name: "Organic Products", slug: "organic", description: "Certified organic produce" },
+    data: { name: "Organic Products", slug: "organic", description: "Certified organic produce", imageUrl: "" },
   });
   const catSeasonal = await prisma.category.create({
-    data: { name: "Seasonal Specials", slug: "seasonal", description: "Limited time seasonal items" },
+    data: { name: "Seasonal Specials", slug: "seasonal", description: "Limited time seasonal items", imageUrl: "" },
   });
   const catLocal = await prisma.category.create({
-    data: { name: "Local Specialties", slug: "local-specialties", description: "Regional specialties from across Bangladesh" },
+    data: { name: "Local Specialties", slug: "local-specialties", description: "Regional specialties from across Bangladesh", imageUrl: "" },
   });
 
   await prisma.category.create({ data: { name: "Leafy Greens", slug: "leafy-greens", parentId: catVeg.id } });
@@ -387,7 +404,7 @@ async function main() {
         origin: template.origin,
         originDetails: template.originDetails,
         nutritionInfo: pick(["Rich in vitamins and minerals.", "High fiber content.", "Good source of protein.", "Low calorie, nutrient dense.", "Contains essential amino acids."]),
-        images: [`/uploads/${template.name.toLowerCase().replace(/[^a-z0-9]/g, "-")}.jpg`],
+        images: template.imageUrl ? [template.imageUrl] : [],
         isAvailable: true,
         isApproved: true,
         approvedAt: randDate(60),
