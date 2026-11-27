@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api/payment";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/payment`;
 
 export const createBkashPayment = async (orderId) => {
   const res = await fetch(`${BASE_URL}/bkash/create`, {
